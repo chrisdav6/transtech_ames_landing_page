@@ -5,6 +5,7 @@ const companies = [
     name: 'TransTech Systems',
     logo: '/images/transtech-logo.svg',
     video: '/videos/transtech.mp4',
+    poster: '/images/transtech-poster.jpg',
     url: 'https://www.transtechsys.com',
     className: 'transtech',
   },
@@ -12,6 +13,7 @@ const companies = [
     name: 'Ames Engineering',
     logo: '/images/ames-logo.svg',
     video: '/videos/ames.mp4',
+    poster: '/images/ames-poster.jpg',
     url: 'https://www.amesengineering.com',
     className: 'ames',
   },
@@ -35,7 +37,8 @@ export default function Home() {
             muted
             loop
             playsInline
-            preload='metadata'
+            preload='none'
+            poster={company.poster}
             aria-hidden='true'
           >
             <source src={company.video} type='video/mp4' />
