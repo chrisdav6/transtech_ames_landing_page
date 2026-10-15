@@ -58,7 +58,7 @@ export default function Home() {
             />
             <span className='visit-label'>
               Explore {company.name}
-              <span aria-hidden='true'> ↗</span>
+              <span aria-hidden='true'> &#x2794;&#xFE0E;</span>
             </span>
           </a>
         </section>
