@@ -15,6 +15,9 @@ export const metadata = {
   title: 'Together in Quality | TransTech Systems & Ames Engineering',
   description:
     'Explore TransTech Systems, Inc. and Ames Engineering LLC, two trusted industry leaders united by quality, engineering expertise, innovative solutions, and customer commitment.',
+  icons: {
+    icon: '/images/favicon.png', // Points to public/images/favicon.png
+  },
 };
 
 export default function RootLayout({ children }) {
