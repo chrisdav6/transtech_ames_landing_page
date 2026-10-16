@@ -104,7 +104,7 @@ body {
 }
 
 .visit-label {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -203,7 +203,7 @@ body {
   .visit-label {
     opacity: 1;
     transform: none;
-    font-size: 10px;
+    font-size: 12px;
   }
 
   .panel-overlay {
