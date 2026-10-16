@@ -26,6 +26,10 @@ export default function Home() {
         Together in Quality — TransTech Systems and Ames Engineering
       </h1>
 
+      <div className='tagline' aria-hidden='true'>
+        Together <span>In</span> Quality
+      </div>
+
       {companies.map((company) => (
         <section
           key={company.name}
