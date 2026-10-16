@@ -42,11 +42,14 @@ export default function Home() {
             muted
             loop
             playsInline
-            preload='none'
+            preload='auto'
             poster={company.poster}
             aria-hidden='true'
             onCanPlay={(event) => event.currentTarget.classList.add('is-ready')}
             onPlaying={(event) => event.currentTarget.classList.add('is-ready')}
+            onError={(event) => {
+              event.currentTarget.classList.remove('is-ready');
+            }}
           >
             <source src={company.video} type='video/mp4' />
           </video>
