@@ -38,8 +38,12 @@ body {
   text-transform: uppercase;
   white-space: nowrap;
 
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
   pointer-events: none;
+
+  background: rgba(0, 0, 0, 0.35);
+  padding: 12px 22px;
+  border-radius: 4px;
 }
 
 /* Each company's half of the screen */
