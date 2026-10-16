@@ -44,9 +44,18 @@ export default function Home() {
             preload='none'
             poster={company.poster}
             aria-hidden='true'
+            onCanPlay={(event) => event.currentTarget.classList.add('is-ready')}
+            onPlaying={(event) => event.currentTarget.classList.add('is-ready')}
           >
             <source src={company.video} type='video/mp4' />
           </video>
+
+          <img
+            className='panel-poster'
+            src={company.poster}
+            alt=''
+            aria-hidden='true'
+          />
 
           <div className='panel-overlay' />
 

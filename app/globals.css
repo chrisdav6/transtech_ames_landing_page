@@ -71,6 +71,35 @@ body {
   transition: transform 700ms ease;
 }
 
+/* Poster image stays visible while the video loads */
+.panel-poster {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+  transition: opacity 800ms ease;
+  pointer-events: none;
+}
+
+/* Fade out the poster when the video can play */
+.panel-video.is-ready + .panel-poster {
+  opacity: 0;
+}
+
+/* Keep the dark overlay above the poster and video */
+.panel-overlay {
+  z-index: 0;
+}
+
+/* Keep the logo and explore link above the overlay */
+.company-link {
+  position: relative;
+  z-index: 1;
+}
+
 /* Dark overlay improves logo readability */
 .panel-overlay {
   position: absolute;
