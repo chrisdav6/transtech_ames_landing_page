@@ -1,4 +1,5 @@
 'use client';
+import { sendGAEvent } from '@next/third-parties/google';
 
 const companies = [
   {
@@ -63,6 +64,19 @@ export default function Home() {
             className='company-link'
             href={company.url}
             aria-label={`Visit ${company.name} website`}
+            onClick={() => {
+              if (company.className === 'transtech') {
+                sendGAEvent('event', 'transtech_outbound_click', {
+                  destination: company.url,
+                  company_name: 'TransTech Systems',
+                });
+              } else if (company.className === 'ames') {
+                sendGAEvent('event', 'ames_outbound_click', {
+                  destination: company.url,
+                  company_name: 'Ames Engineering',
+                });
+              }
+            }}
           >
             <img
               className='company-logo'
