@@ -82,6 +82,10 @@ body {
   }
 }
 
+/* ==========================================
+   DESKTOP — TAGLINE FOLLOWS LOGOS
+   ========================================== */
+
 @media (min-width: 701px) {
   .tagline span {
     opacity: 0;
@@ -89,21 +93,27 @@ body {
   }
 
   .tagline span:nth-child(1) {
-    animation-delay: 0.4s;
+    animation-delay: 1.6s;
   }
 
   .tagline span:nth-child(2) {
-    animation-delay: 1.2s;
+    animation-delay: 2.4s;
   }
 
   .tagline span:nth-child(3) {
-    animation-delay: 2s;
+    animation-delay: 3.2s;
   }
 }
 
 /* Respect reduced-motion accessibility preferences */
 @media (prefers-reduced-motion: reduce) {
   .tagline span {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .company-logo {
     animation: none;
     opacity: 1;
     transform: none;
@@ -134,7 +144,8 @@ body {
 
 @media (max-width: 700px) {
   .tagline {
-    animation: mobileTaglineBounce 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.2s
+    /* Keep your other existing mobile styles */
+    animation: mobileTaglineBounce 0.85s cubic-bezier(0.22, 1, 0.36, 1) 1.4s
       both;
   }
 
@@ -228,6 +239,27 @@ body {
   object-fit: contain;
   filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.2));
   transition: transform 400ms ease;
+}
+
+/* ==========================================
+   COMPANY LOGOS — FADE IN FIRST
+   ========================================== */
+
+@keyframes logoFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.company-logo {
+  opacity: 0;
+  animation: logoFadeInUp 1.2s ease-out 0.2s both;
 }
 
 .visit-label {
