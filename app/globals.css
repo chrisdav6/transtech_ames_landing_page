@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+/* ==========================================
+   1. GLOBAL STYLES
+   ========================================== */
+
 * {
   box-sizing: border-box;
 }
@@ -23,139 +27,23 @@ body {
   background: #151515;
 }
 
-.tagline {
+/* Screen-reader-only heading */
+.sr-only {
   position: absolute;
-  top: calc(50% - 10px);
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-
-  margin: 0;
+  width: 1px;
+  height: 1px;
   padding: 0;
-
-  color: #fff;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(32px, 3.4vw, 48px);
-  font-weight: 700;
-  line-height: 0.98;
-  letter-spacing: 0.075em;
-  text-align: center;
-  text-transform: uppercase;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
   white-space: nowrap;
-
-  -webkit-text-stroke: 0.8px rgba(0, 0, 0, 0.75);
-  paint-order: stroke fill;
-
-  text-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.65),
-    0 5px 14px rgba(0, 0, 0, 0.35);
-
-  pointer-events: none;
-}
-
-.tagline span {
-  display: block;
-  flex: 0 0 auto;
-}
-
-/* Make "IN" a smaller supporting line */
-.tagline span:nth-child(2) {
-  font-size: 0.58em;
-  font-weight: 500;
-  margin: 0.12em 0 0.08em;
-}
-
-/* Slower fade-in animation for each desktop tagline word */
-@keyframes taglineWordFadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  border: 0;
 }
 
 /* ==========================================
-   DESKTOP — TAGLINE FOLLOWS LOGOS
+   2. COMPANY PANELS
    ========================================== */
 
-@media (min-width: 701px) {
-  .tagline span {
-    opacity: 0;
-    animation: taglineWordFadeInUp 1.4s ease-out forwards;
-  }
-
-  .tagline span:nth-child(1) {
-    animation-delay: 1.6s;
-  }
-
-  .tagline span:nth-child(2) {
-    animation-delay: 2.4s;
-  }
-
-  .tagline span:nth-child(3) {
-    animation-delay: 3.2s;
-  }
-}
-
-/* Respect reduced-motion accessibility preferences */
-@media (prefers-reduced-motion: reduce) {
-  .tagline span {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
-
-  .company-logo {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* Mobile tagline: quick, smooth fade-in bounce */
-@keyframes mobileTaglineBounce {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.82);
-  }
-
-  70% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.04);
-  }
-
-  85% {
-    transform: translate(-50%, -50%) scale(0.99);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-}
-
-@media (max-width: 700px) {
-  .tagline {
-    /* Keep your other existing mobile styles */
-    animation: mobileTaglineBounce 0.85s cubic-bezier(0.22, 1, 0.36, 1) 1.4s
-      both;
-  }
-
-  .tagline span {
-    opacity: 1;
-    animation: none;
-  }
-}
-
-/* Each company's half of the screen */
 .company-panel {
   position: relative;
   display: flex;
@@ -180,7 +68,7 @@ body {
   transition: transform 700ms ease;
 }
 
-/* Poster image stays visible while the video loads */
+/* Poster remains visible while video loads */
 .panel-poster {
   position: absolute;
   inset: 0;
@@ -193,20 +81,9 @@ body {
   pointer-events: none;
 }
 
-/* Fade out the poster when the video can play */
+/* Hide poster when video can play */
 .panel-video.is-ready + .panel-poster {
   opacity: 0;
-}
-
-/* Keep the dark overlay above the poster and video */
-.panel-overlay {
-  z-index: 0;
-}
-
-/* Keep the logo and explore link above the overlay */
-.company-link {
-  position: relative;
-  z-index: 1;
 }
 
 /* Dark overlay improves logo readability */
@@ -218,8 +95,13 @@ body {
   transition: background 400ms ease;
 }
 
-/* Centered, clickable logo */
+/* ==========================================
+   3. COMPANY LINKS AND LOGOS
+   ========================================== */
+
 .company-link {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -232,19 +114,19 @@ body {
   outline-offset: 8px;
 }
 
+/* Logo sizing and appearance */
 .company-logo {
   display: block;
   width: min(72%, 380px);
+  max-width: 100%;
   max-height: 150px;
   object-fit: contain;
+  opacity: 0;
   filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.2));
   transition: transform 400ms ease;
 }
 
-/* ==========================================
-   COMPANY LOGOS — FADE IN FIRST
-   ========================================== */
-
+/* Logo entrance animation */
 @keyframes logoFadeInUp {
   from {
     opacity: 0;
@@ -257,11 +139,12 @@ body {
   }
 }
 
+/* Both logos fade in together */
 .company-logo {
-  opacity: 0;
   animation: logoFadeInUp 1.2s ease-out 0.2s both;
 }
 
+/* Explore link */
 .visit-label {
   font-size: 14px;
   font-weight: 600;
@@ -274,7 +157,10 @@ body {
     transform 300ms ease;
 }
 
-/* Interactive desktop treatment */
+/* ==========================================
+   4. INTERACTIVE HOVER EFFECTS
+   ========================================== */
+
 @media (hover: hover) and (pointer: fine) {
   .company-panel:hover .panel-video {
     transform: scale(1.04);
@@ -309,20 +195,98 @@ body {
   transform: translateY(0);
 }
 
-/* Screen-reader-only heading */
-.sr-only {
+/* ==========================================
+   5. TAGLINE — BASE STYLING
+   ========================================== */
+
+.tagline {
   position: absolute;
-  width: 1px;
-  height: 1px;
+  top: calc(50% - 10px);
+  left: 50%;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+
+  margin: 0;
   padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+
+  color: #fff;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(32px, 3.4vw, 48px);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: 0.075em;
+  text-align: center;
+  text-transform: uppercase;
   white-space: nowrap;
-  border: 0;
+
+  -webkit-text-stroke: 0.8px rgba(0, 0, 0, 0.75);
+  paint-order: stroke fill;
+
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.65),
+    0 5px 14px rgba(0, 0, 0, 0.35);
+
+  pointer-events: none;
 }
 
-/* Adjust tagline and logo sizing on smaller desktop screens to prevent overlap. */
+.tagline span {
+  display: block;
+  flex: 0 0 auto;
+}
+
+/* Desktop: make "IN" a smaller supporting line */
+.tagline span:nth-child(2) {
+  font-size: 0.58em;
+  font-weight: 500;
+  margin: 0.12em 0 0.08em;
+}
+
+/* ==========================================
+   6. DESKTOP TAGLINE ANIMATION
+   Logos appear first; tagline follows
+   ========================================== */
+
+@keyframes taglineWordFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 701px) {
+  .tagline span {
+    opacity: 0;
+    animation: taglineWordFadeInUp 1.4s ease-out forwards;
+  }
+
+  .tagline span:nth-child(1) {
+    animation-delay: 1.6s;
+  }
+
+  .tagline span:nth-child(2) {
+    animation-delay: 2.4s;
+  }
+
+  .tagline span:nth-child(3) {
+    animation-delay: 3.2s;
+  }
+}
+
+/* ==========================================
+   7. TABLET / SMALL DESKTOP
+   Prevent logos crowding the tagline
+   ========================================== */
+
 @media (min-width: 701px) and (max-width: 1100px) {
   .tagline {
     font-size: clamp(22px, 2.6vw, 30px);
@@ -335,19 +299,77 @@ body {
   }
 }
 
-/* Mobile: stacked panels */
+/* ==========================================
+   8. MOBILE TAGLINE ANIMATION
+   Quick, smooth fade-in bounce
+   ========================================== */
+
+@keyframes mobileTaglineBounce {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.82);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.04);
+  }
+
+  85% {
+    transform: translate(-50%, -50%) scale(0.99);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* ==========================================
+   9. MOBILE LAYOUT
+   Stacked panels and single-line tagline
+   ========================================== */
+
 @media (max-width: 700px) {
   .landing {
     flex-direction: column;
   }
 
-  /* Position tagline directly on the panel split */
+  .company-panel {
+    flex: 1 1 50%;
+    width: 100%;
+    min-height: 0;
+  }
+
+  /* Mobile logo sizing */
+  .company-logo {
+    width: min(68%, 300px);
+    max-width: 100%;
+    max-height: 100px;
+  }
+
+  .company-link {
+    gap: 14px;
+    padding: 20px;
+  }
+
+  /* Keep explore link visible on touch devices */
+  .visit-label {
+    opacity: 1;
+    transform: none;
+    font-size: 12px;
+  }
+
+  .panel-overlay {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  /* Tagline sits over the split between the two panels */
   .tagline {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 
-    display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
@@ -356,11 +378,11 @@ body {
 
     width: max-content;
     max-width: none;
-    white-space: nowrap;
 
     font-size: clamp(17px, calc(3.8vw + 5px), 25px);
     line-height: 1.2;
     letter-spacing: 0.04em;
+    white-space: nowrap;
 
     padding: 12px 16px;
     background: rgba(0, 0, 0, 0.65);
@@ -371,51 +393,33 @@ body {
     text-shadow:
       0 1px 3px rgba(0, 0, 0, 0.95),
       1px 2px 4px rgba(0, 0, 0, 0.85);
+
+    animation: mobileTaglineBounce 0.85s cubic-bezier(0.22, 1, 0.36, 1) 1.4s
+      both;
   }
 
   .tagline span {
     display: inline;
     flex: 0 0 auto;
+    opacity: 1;
+    animation: none;
   }
 
+  /* Mobile "IN": smaller and vertically centered */
   .tagline span:nth-child(2) {
     font-size: 0.75em;
     font-weight: inherit;
     letter-spacing: inherit;
     margin: 0;
-
     align-self: center;
     line-height: 1;
   }
-
-  .company-panel {
-    flex: 1 1 50%;
-    width: 100%;
-    min-height: 0;
-  }
-
-  .company-logo {
-    width: min(68%, 300px);
-    max-height: 100px;
-  }
-
-  .company-link {
-    gap: 14px;
-    padding: 20px;
-  }
-
-  .visit-label {
-    opacity: 1;
-    transform: none;
-    font-size: 12px;
-  }
-
-  .panel-overlay {
-    background: rgba(0, 0, 0, 0.3);
-  }
 }
 
-/* Respect reduced-motion preferences */
+/* ==========================================
+   10. REDUCED-MOTION ACCESSIBILITY
+   ========================================== */
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -424,6 +428,19 @@ body {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+
+  .company-logo {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .tagline,
+  .tagline span {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 
   .panel-video {
