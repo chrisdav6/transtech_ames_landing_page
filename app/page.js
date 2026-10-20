@@ -9,6 +9,7 @@ const companies = [
     poster: '/images/transtech-poster.jpg',
     url: 'https://www.transtechsys.com',
     className: 'transtech',
+    analyticsEvent: 'transtech_outbound_click',
   },
   {
     name: 'Ames Engineering',
@@ -17,8 +18,41 @@ const companies = [
     poster: '/images/ames-poster.jpg',
     url: 'https://www.amesengineering.com',
     className: 'ames',
+    analyticsEvent: 'ames_outbound_click',
   },
 ];
+
+function PanelVideo({ company }) {
+  return (
+    <>
+      <video
+        className='panel-video'
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload='auto'
+        poster={company.poster}
+        aria-hidden='true'
+        onPlaying={(event) => {
+          event.currentTarget.classList.add('is-ready');
+        }}
+        onError={(event) => {
+          event.currentTarget.classList.remove('is-ready');
+        }}
+      >
+        <source src={company.video} type='video/mp4' />
+      </video>
+
+      <img
+        className='panel-poster'
+        src={company.poster}
+        alt=''
+        aria-hidden='true'
+      />
+    </>
+  );
+}
 
 export default function Home() {
   return (
@@ -38,30 +72,7 @@ export default function Home() {
           key={company.name}
           className={`company-panel ${company.className}`}
         >
-          <video
-            className='panel-video'
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload='auto'
-            poster={company.poster}
-            aria-hidden='true'
-            onCanPlay={(event) => event.currentTarget.classList.add('is-ready')}
-            onPlaying={(event) => event.currentTarget.classList.add('is-ready')}
-            onError={(event) => {
-              event.currentTarget.classList.remove('is-ready');
-            }}
-          >
-            <source src={company.video} type='video/mp4' />
-          </video>
-
-          <img
-            className='panel-poster'
-            src={company.poster}
-            alt=''
-            aria-hidden='true'
-          />
+          <PanelVideo company={company} />
 
           <div className='panel-overlay' />
 
@@ -70,17 +81,10 @@ export default function Home() {
             href={company.url}
             aria-label={`Visit ${company.name} website`}
             onClick={() => {
-              if (company.className === 'transtech') {
-                sendGAEvent('event', 'transtech_outbound_click', {
-                  destination: company.url,
-                  company_name: 'TransTech Systems',
-                });
-              } else if (company.className === 'ames') {
-                sendGAEvent('event', 'ames_outbound_click', {
-                  destination: company.url,
-                  company_name: 'Ames Engineering',
-                });
-              }
+              sendGAEvent('event', company.analyticsEvent, {
+                destination: company.url,
+                company_name: company.name,
+              });
             }}
           >
             <img
@@ -88,6 +92,7 @@ export default function Home() {
               src={company.logo}
               alt={`${company.name} logo`}
             />
+
             <span className='visit-label'>
               Explore {company.name}
               <span aria-hidden='true'> &#x2794;&#xFE0E;</span>
