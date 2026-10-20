@@ -81,7 +81,7 @@ body {
   pointer-events: none;
 }
 
-/* Hide poster when video can play */
+/* Hide poster when video starts playing */
 .panel-video.is-ready + .panel-poster {
   opacity: 0;
 }
@@ -114,7 +114,7 @@ body {
   outline-offset: 8px;
 }
 
-/* Logo sizing and appearance */
+/* Logo sizing, appearance, and entrance animation */
 .company-logo {
   display: block;
   width: min(72%, 380px);
@@ -123,25 +123,20 @@ body {
   object-fit: contain;
   opacity: 0;
   filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.2));
-  transition: transform 400ms ease;
+  animation: logoFadeUp 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
 }
 
-/* Logo entrance animation */
-@keyframes logoFadeInUp {
+/* Logos rise farther from below and fade into place */
+@keyframes logoFadeUp {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(100px);
   }
 
   to {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-/* Both logos fade in together */
-.company-logo {
-  animation: logoFadeInUp 1.2s ease-out 0.2s both;
 }
 
 /* Explore link */
