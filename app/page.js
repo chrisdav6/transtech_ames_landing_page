@@ -1,4 +1,5 @@
 'use client';
+import { useEffect } from 'react';
 import { sendGAEvent } from '@next/third-parties/google';
 
 const companies = [
@@ -55,6 +56,26 @@ function PanelVideo({ company }) {
 }
 
 export default function Home() {
+  useEffect(() => {
+    function restartLogoAnimations() {
+      document.querySelectorAll('.company-logo').forEach((logo) => {
+        logo.style.animation = 'none';
+
+        // Force the browser to reset the animation.
+        void logo.offsetHeight;
+
+        // Restore the CSS animation.
+        logo.style.animation = '';
+      });
+    }
+
+    window.addEventListener('pageshow', restartLogoAnimations);
+
+    return () => {
+      window.removeEventListener('pageshow', restartLogoAnimations);
+    };
+  }, []);
+
   return (
     <main className='landing'>
       <h1 className='sr-only'>
