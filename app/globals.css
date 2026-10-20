@@ -307,16 +307,28 @@ body {
 @keyframes mobileTaglineBounce {
   0% {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.82);
+    transform: translate(-50%, -50%) scale(0.75);
   }
 
-  70% {
+  45% {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1.04);
+    transform: translate(-50%, -50%) scale(1.08);
   }
 
-  85% {
-    transform: translate(-50%, -50%) scale(0.99);
+  60% {
+    transform: translate(-50%, -50%) scale(0.94);
+  }
+
+  72% {
+    transform: translate(-50%, -50%) scale(1.035);
+  }
+
+  82% {
+    transform: translate(-50%, -50%) scale(0.98);
+  }
+
+  91% {
+    transform: translate(-50%, -50%) scale(1.012);
   }
 
   100% {
@@ -394,8 +406,7 @@ body {
       0 1px 3px rgba(0, 0, 0, 0.95),
       1px 2px 4px rgba(0, 0, 0, 0.85);
 
-    animation: mobileTaglineBounce 0.85s cubic-bezier(0.22, 1, 0.36, 1) 1.4s
-      both;
+    animation: mobileTaglineBounce 1.2s cubic-bezier(0.22, 1, 0.36, 1) 1.4s both;
   }
 
   .tagline span {
