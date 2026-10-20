@@ -28,7 +28,9 @@ export default function Home() {
       </h1>
 
       <div className='tagline' aria-hidden='true'>
-        Together <span>In</span> Quality
+        <span>Together</span>
+        <span>In</span>
+        <span>Quality</span>
       </div>
 
       {companies.map((company) => (

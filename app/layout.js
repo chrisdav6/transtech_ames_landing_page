@@ -1,10 +1,17 @@
 import './globals.css';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { Roboto } from 'next/font/google';
+import { Barlow_Condensed } from 'next/font/google';
 
 const roboto = Roboto({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
+  display: 'swap',
+});
+
+const barlow = Barlow_Condensed({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
   display: 'swap',
 });
 
@@ -19,7 +26,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang='en' className={`${roboto.className} h-full antialiased`}>
+    <html
+      lang='en'
+      className={`${roboto.className} ${barlow.className} h-full antialiased`}
+    >
       <body className='min-h-full flex flex-col'>
         {children}
         {process.env.NEXT_PUBLIC_GA_ID && (
