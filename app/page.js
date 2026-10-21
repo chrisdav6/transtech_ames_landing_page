@@ -11,6 +11,7 @@ const companies = [
     url: 'https://www.transtechsys.com',
     className: 'transtech',
     analyticsEvent: 'transtech_outbound_click',
+    tagline: 'Innovators of Non-Nuclear Density Technology',
   },
   {
     name: 'Ames Engineering',
@@ -20,6 +21,7 @@ const companies = [
     url: 'https://www.amesengineering.com',
     className: 'ames',
     analyticsEvent: 'ames_outbound_click',
+    tagline: 'The Leaders In Road Profiling Technology',
   },
 ];
 
@@ -113,6 +115,8 @@ export default function Home() {
               src={company.logo}
               alt={`${company.name} logo`}
             />
+
+            <p className='company-tagline'>{company.tagline}</p>
 
             <span className='visit-label'>
               Explore {company.name}
